@@ -1,17 +1,21 @@
 ## Overview
-Repository with preconfigured maven project with junit5 configuration on a board.
+
+Réalisation d'une solution du Kata de la tondeuse 
+
+Création d'un fork de https://github.com/template-repository/maven-template-repository pour initier le projet.
 
 ## Building
-...
+maven package
+
 
 ## Troubleshooting
-...
 
 ## Release Notes
 Can be found in [RELEASE_NOTES](RELEASE_NOTES.md).
 
 ## Authors
-* Roman Beskrovnyi - [romankh3](https://github.com/romankh3)
+* [Nicolas DELAHAYE](https://github.com/nico-des-chocos)
+* [Roman Beskrovnyi](https://github.com/romankh3) - https://github.com/template-repository/maven-template-repository
 
 ## Acknowledgments
 ...
