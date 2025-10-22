@@ -1,9 +1,13 @@
-package com.github.nico.kata.tondeuse;
+package com.github.nico.kata.tondeuse.adapters.input;
 
 import java.io.File;
 
-public class FileArgumentValidator {
+public class ArgumentValidator {
     public static boolean validate(String[] strings) {
+        if (strings.length != 1) {
+            throw new IllegalArgumentException("Absence d'argument");
+        }
+
         File file = new File(strings[0]);
         System.out.println("Fichier ? "+ file.getAbsolutePath());
         if (!file.exists()) {

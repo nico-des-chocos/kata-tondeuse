@@ -1,4 +1,4 @@
-package com.github.nico.kata.tondeuse;
+package com.github.nico.kata.tondeuse.domain;
 
 import java.util.Objects;
 

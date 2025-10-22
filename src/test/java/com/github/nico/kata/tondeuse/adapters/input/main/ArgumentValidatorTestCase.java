@@ -1,9 +1,8 @@
-package com.github.nico.kata.tondeuse;
+package com.github.nico.kata.tondeuse.adapters.input.main;
 
 
+import com.github.nico.kata.tondeuse.adapters.input.ArgumentValidator;
 import org.junit.jupiter.api.Test;
-
-import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

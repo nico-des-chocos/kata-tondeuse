@@ -1,10 +1,14 @@
-package com.github.nico.kata.tondeuse;
+package com.github.nico.kata.tondeuse.adapters.input.main;
+
+import com.github.nico.kata.tondeuse.domain.Orientation;
+import com.github.nico.kata.tondeuse.domain.Position;
+import com.github.nico.kata.tondeuse.domain.Lawnmower;
+import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,6 +17,8 @@ public class ConfigFileLoader {
     private final int _gardenHeight;
 
     private final ArrayList<Lawnmower> _lawnmowers = new ArrayList<>();
+
+    private CommandBuilder _commandBuilder;
 
     public ConfigFileLoader(final String filePath) {
         try {
@@ -28,7 +34,7 @@ public class ConfigFileLoader {
             // Second line First Lawsmower
             line = scanner.nextLine();
             String[] lawsmower_info = line.split(" ");
-            _lawnmowers.add(new Lawnmower(new Position(Integer.parseInt(lawsmower_info[0]),Integer.parseInt(lawsmower_info[1])), Orientation.valueOfFromShort(lawsmower_info[2])));
+            _lawnmowers.add(new Lawnmower(new Position(Integer.parseInt(lawsmower_info[0]),Integer.parseInt(lawsmower_info[1])), OrientationAdapter.valueOf(lawsmower_info[2])));
 
 
             // Third line command for the first Lawsmower
@@ -54,5 +60,9 @@ public class ConfigFileLoader {
 
     public List<LawnmowerCommand> getLawnmowerCommands() {
         return new ArrayList<>();
+    }
+
+    public void setCommandBuilder(CommandBuilder commandBuilder) {
+        _commandBuilder =  commandBuilder;
     }
 }

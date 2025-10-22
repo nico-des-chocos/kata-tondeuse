@@ -1,4 +1,4 @@
-package com.github.nico.kata.tondeuse;
+package com.github.nico.kata.tondeuse.adapters.input.main;
 
 import org.junit.jupiter.api.Test;
 
