@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ConfigFileLoaderTestCase {
+public class ConfigFileLoaderImplTestCase {
     @Test
     public void loadGardenSize() {
-        ConfigFileLoader config = getConfigFileLoaderForOneLanmower();
+        ConfigFileLoaderImpl config = getConfigFileLoaderForOneLawnmower();
 
         assertEquals(5, config.getGardenWith());
         assertEquals(5, config.getGardenHeight());
@@ -17,7 +17,7 @@ public class ConfigFileLoaderTestCase {
 
     @Test
     public void loadLawnmower() {
-        ConfigFileLoader config = getConfigFileLoaderForOneLanmower();
+        ConfigFileLoaderImpl config = getConfigFileLoaderForOneLawnmower();
         assertEquals(1, config.getLawnmowers().size());
         Lawnmower lawnmower = new Lawnmower(new Coordinates(1,2), Orientation.NORTH);
         assertEquals(lawnmower,  config.getLawnmowers().get(0));
@@ -25,16 +25,16 @@ public class ConfigFileLoaderTestCase {
 
     @Test
     public void loadLawnmowerCommands() {
-        ConfigFileLoader config = getConfigFileLoaderForOneLanmower();
+        ConfigFileLoaderImpl config = getConfigFileLoaderForOneLawnmower();
         assertEquals(1, config.getLawnmowerCommands().size());
     }
 
-    private ConfigFileLoader getConfigFileLoaderForOneLanmower() {
+    private ConfigFileLoaderImpl getConfigFileLoaderForOneLawnmower() {
         return getConfigFileLoader("data/test/parcourt_simple_une_tondeuse.txt");
     }
 
-    private ConfigFileLoader getConfigFileLoader(String filePath) {
-        ConfigFileLoader config = new ConfigFileLoader(new StubCommandBuilder());
+    private ConfigFileLoaderImpl getConfigFileLoader(String filePath) {
+        ConfigFileLoaderImpl config = new ConfigFileLoaderImpl(new StubCommandBuilder());
         config.loadConfigFromFile(filePath);
         return config;
     }
@@ -42,7 +42,7 @@ public class ConfigFileLoaderTestCase {
     private static class StubCommandBuilder implements CommandBuilder {
 
         @Override
-        public LawnmowerCommand getCommand(final LownmowerCommandType type) {
+        public LawnmowerCommand getCommand(final LawnmowerCommandType type) {
             return lawnmower -> lawnmower;
         }
     }

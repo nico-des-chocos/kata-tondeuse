@@ -23,13 +23,14 @@
     <properties>
         <mockito.version>2.26.0</mockito.version>
         <junit.version>5.5.2</junit.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javadoc.plugin.version>3.1.1</javadoc.plugin.version>
         <source.plugin.version>3.2.0</source.plugin.version>
         <surefire.plugin.version>2.22.2</surefire.plugin.version>
         <resources.plugin.version>3.3.1</resources.plugin.version>
+        <maven-jar.plugin.version>3.4.1</maven-jar.plugin.version>
     </properties>
 
     <dependencies>
@@ -84,6 +85,19 @@
                 <configuration>
                     <source>21</source>
                     <target>21</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar.plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.github.nico.kata.tondeuse.ports.input.main.LawnmowerMain</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

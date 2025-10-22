@@ -2,7 +2,7 @@ package com.github.nico.kata.tondeuse.domain;
 
 import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Lawnmower {
@@ -13,7 +13,7 @@ public class Lawnmower {
         updateState(pos, orientation);
     }
 
-    public void move(ArrayList<LawnmowerCommand> lawnmowerCommands) {
+    public void move(List<LawnmowerCommand> lawnmowerCommands) {
         lawnmowerCommands.forEach(lawnmowerCommand -> lawnmowerCommand.doMove(this));
     }
 
@@ -35,5 +35,10 @@ public class Lawnmower {
     @Override
     public int hashCode() {
         return Objects.hash(_coordinates, _orientation);
+    }
+
+    @Override
+    public String toString() {
+        return _coordinates.get_x() + " " + _coordinates.get_y() + " " + _orientation;
     }
 }

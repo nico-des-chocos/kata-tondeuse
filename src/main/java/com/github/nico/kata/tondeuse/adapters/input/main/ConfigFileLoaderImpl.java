@@ -1,5 +1,6 @@
 package com.github.nico.kata.tondeuse.adapters.input.main;
 
+import com.github.nico.kata.tondeuse.adapters.input.ConfigLoader;
 import com.github.nico.kata.tondeuse.domain.Coordinates;
 import com.github.nico.kata.tondeuse.domain.Lawnmower;
 import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
@@ -9,9 +10,10 @@ import java.io.FileNotFoundException;
 import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class ConfigFileLoader {
+public class ConfigFileLoaderImpl implements ConfigLoader {
     private  int _gardenWith;
     private  int _gardenHeight;
 
@@ -21,7 +23,7 @@ public class ConfigFileLoader {
 
     private final CommandBuilder _commandBuilder;
 
-    public ConfigFileLoader(CommandBuilder commandBuilder) {
+    public ConfigFileLoaderImpl(CommandBuilder commandBuilder) {
         _commandBuilder = commandBuilder;
     }
 
@@ -45,7 +47,8 @@ public class ConfigFileLoader {
             // Third line command for the first Lawsmower
             line = scanner.nextLine();
             ArrayList<LawnmowerCommand> commands = new ArrayList<>();
-            line.chars().forEach(c -> commands.add(_commandBuilder.getCommand(LownmowerCommandType.valueOf(Character.toString(c)) )));
+            line.chars().forEach(c -> commands.add(_commandBuilder.getCommand(LawnmowerCommandType.valueOf(Character.toString(c)) )));
+            commands.removeIf(Objects::isNull);
             _commands.add(commands);
 
 
@@ -54,19 +57,23 @@ public class ConfigFileLoader {
         }
     }
 
+    @Override
     public int getGardenWith() {
         return _gardenWith;
     }
 
+    @Override
     public int getGardenHeight() {
         return _gardenHeight;
     }
 
+    @Override
     public List<Lawnmower> getLawnmowers() {
         return new ArrayList<>(_lawnmowers);
     }
 
-    public ArrayList<List<LawnmowerCommand>> getLawnmowerCommands() {
+    @Override
+    public List<List<LawnmowerCommand>> getLawnmowerCommands() {
         return new ArrayList<>(_commands);
     }
 

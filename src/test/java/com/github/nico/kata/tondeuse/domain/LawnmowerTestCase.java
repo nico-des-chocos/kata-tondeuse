@@ -20,6 +20,14 @@ class LawnmowerTestCase {
 
         assertEquals(expected, lawnmower);
     }
+    @Test
+    public void no_command_to_move_lawnmower() {
+        Lawnmower lawnmower = new Lawnmower(new Coordinates(0, 0), Orientation.EAST);
+        ArrayList<LawnmowerCommand> lawnmowerCommands = new ArrayList<>();
+        lawnmowerCommands.add(new StubLawnmowerCommand(lawnmower));
+        lawnmower.move(lawnmowerCommands);
+        assertEquals(lawnmower, lawnmower);
+    }
 
     private static class StubLawnmowerCommand implements LawnmowerCommand {
         Lawnmower _lawnmower_expected;
