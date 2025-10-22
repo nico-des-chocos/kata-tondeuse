@@ -1,4 +1,4 @@
-package com.github.nico.kata.tondeuse.adapters.input.main;
+package com.github.nico.kata.tondeuse.adapters.input.main.validator;
 
 import java.io.File;
 

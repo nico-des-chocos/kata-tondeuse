@@ -1,12 +1,14 @@
 package com.github.nico.kata.tondeuse.ports.input.main;
 
-import com.github.nico.kata.tondeuse.adapters.input.ArgumentValidator;
+import com.github.nico.kata.tondeuse.adapters.input.main.validator.ArgumentValidator;
 import com.github.nico.kata.tondeuse.adapters.input.main.CommandBuilderImpl;
 import com.github.nico.kata.tondeuse.adapters.input.main.ConfigFileLoaderImpl;
-import com.github.nico.kata.tondeuse.adapters.input.main.FileArgumentValidator;
+import com.github.nico.kata.tondeuse.adapters.input.main.validator.FileArgumentValidator;
 import com.github.nico.kata.tondeuse.domain.Lawnmower;
 import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
+import com.github.nico.kata.tondeuse.ports.output.main.OutPrintLawnmowerState;
 
+import java.io.IOException;
 import java.util.List;
 
 public class LawnmowerMain {
@@ -28,14 +30,12 @@ public class LawnmowerMain {
             for(int i = 0; i < lawnmowers.size(); i++){
                 Lawnmower lawnmower = lawnmowers.get(i);
                 lawnmower.move(commands.get(i));
-                System.out.println(lawnmower);
             }
 
-        } catch (IllegalArgumentException e) {
+            OutPrintLawnmowerState.printState(System.out, lawnmowers);
+        } catch (IllegalArgumentException | IOException e) {
             System.err.println(e.getMessage());
         }
-
-
     }
 
 

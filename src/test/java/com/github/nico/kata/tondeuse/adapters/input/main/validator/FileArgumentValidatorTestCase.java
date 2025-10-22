@@ -1,4 +1,4 @@
-package com.github.nico.kata.tondeuse.adapters.input.main;
+package com.github.nico.kata.tondeuse.adapters.input.main.validator;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,9 +9,7 @@ public class FileArgumentValidatorTestCase {
 
     @Test
     public void fichierInexistant() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            FileArgumentValidator.validate(new String[]{"fichier_inexistant.txt"});
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> FileArgumentValidator.validate(new String[]{"fichier_inexistant.txt"}));
     }
 
     @Test
