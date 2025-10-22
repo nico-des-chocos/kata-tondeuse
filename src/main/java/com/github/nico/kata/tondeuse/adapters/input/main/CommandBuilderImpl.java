@@ -4,6 +4,8 @@ import com.github.nico.kata.tondeuse.adapters.input.ConfigLoader;
 import com.github.nico.kata.tondeuse.domain.Coordinates;
 import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
 import com.github.nico.kata.tondeuse.domain.command.impl.ForwardCommand;
+import com.github.nico.kata.tondeuse.domain.command.impl.TurnOnLeftCommand;
+import com.github.nico.kata.tondeuse.domain.command.impl.TurnOnRightCommand;
 
 public class CommandBuilderImpl implements CommandBuilder {
 
@@ -16,9 +18,9 @@ public class CommandBuilderImpl implements CommandBuilder {
             case A:
                 return new ForwardCommand(new Coordinates(_configFileLoader.getGardenWith(), _configFileLoader.getGardenHeight()));
             case G:
-                break;
+                return new TurnOnLeftCommand();
             case D:
-                break;
+                return new TurnOnRightCommand();
         }
         return null;
     }

@@ -4,6 +4,8 @@ import com.github.nico.kata.tondeuse.adapters.input.ConfigLoader;
 import com.github.nico.kata.tondeuse.domain.Lawnmower;
 import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
 import com.github.nico.kata.tondeuse.domain.command.impl.ForwardCommand;
+import com.github.nico.kata.tondeuse.domain.command.impl.TurnOnLeftCommand;
+import com.github.nico.kata.tondeuse.domain.command.impl.TurnOnRightCommand;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -46,4 +48,12 @@ class CommandBuilderImplTestCase {
         assertEquals(ForwardCommand.class, commandBuilder.getCommand(LawnmowerCommandType.A).getClass());
     }
 
+    @Test
+    void getTurnOnLeftCommand() {
+        assertEquals(TurnOnLeftCommand.class, commandBuilder.getCommand(LawnmowerCommandType.G).getClass());
+    }
+    @Test
+    void getTurnOnRightCommand() {
+        assertEquals(TurnOnRightCommand.class, commandBuilder.getCommand(LawnmowerCommandType.D).getClass());
+    }
 }
