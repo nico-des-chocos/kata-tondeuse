@@ -1,6 +1,6 @@
 package com.github.nico.kata.tondeuse.adapters.input.main;
 
-import com.github.nico.kata.tondeuse.domain.Position;
+import com.github.nico.kata.tondeuse.domain.Coordinates;
 import com.github.nico.kata.tondeuse.domain.Lawnmower;
 import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
 
@@ -39,7 +39,7 @@ public class ConfigFileLoader {
             // Second line First Lawsmower
             line = scanner.nextLine();
             String[] lawsmower_info = line.split(" ");
-            _lawnmowers.add(new Lawnmower(new Position(Integer.parseInt(lawsmower_info[0]),Integer.parseInt(lawsmower_info[1])), OrientationAdapter.valueOf(lawsmower_info[2])));
+            _lawnmowers.add(new Lawnmower(new Coordinates(Integer.parseInt(lawsmower_info[0]),Integer.parseInt(lawsmower_info[1])), OrientationAdapter.valueOf(lawsmower_info[2])));
 
 
             // Third line command for the first Lawsmower
@@ -47,6 +47,8 @@ public class ConfigFileLoader {
             ArrayList<LawnmowerCommand> commands = new ArrayList<>();
             line.chars().forEach(c -> commands.add(_commandBuilder.getCommand(LownmowerCommandType.valueOf(Character.toString(c)) )));
             _commands.add(commands);
+
+
         } catch (FileNotFoundException e) {
             throw new InvalidPathException(filePath, e.getMessage());
         }

@@ -11,8 +11,8 @@ class LawnmowerTestCase {
 
     @Test
     public void move_lawnmower() {
-        Lawnmower lawnmower = new Lawnmower(new Position(0,0), Orientation.EAST);
-        Lawnmower expected = new Lawnmower(new Position(0,1), Orientation.EAST);
+        Lawnmower lawnmower = new Lawnmower(new Coordinates(0,0), Orientation.EAST);
+        Lawnmower expected = new Lawnmower(new Coordinates(0,1), Orientation.EAST);
 
         ArrayList<LawnmowerCommand> lawnmowerCommands = new ArrayList<>();
         lawnmowerCommands.add(new StubLawnmowerCommand(expected));
@@ -29,7 +29,7 @@ class LawnmowerTestCase {
 
         @Override
         public Lawnmower doMove(Lawnmower lawnmower) {
-            lawnmower.updateState(_lawnmower_expected.getPosition(), _lawnmower_expected.getOrientation());
+            lawnmower.updateState(_lawnmower_expected.getCoordinates(), _lawnmower_expected.getOrientation());
             return lawnmower;
         }
     }

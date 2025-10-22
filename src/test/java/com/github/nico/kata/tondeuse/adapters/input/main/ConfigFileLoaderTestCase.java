@@ -19,7 +19,7 @@ public class ConfigFileLoaderTestCase {
     public void loadLawnmower() {
         ConfigFileLoader config = getConfigFileLoaderForOneLanmower();
         assertEquals(1, config.getLawnmowers().size());
-        Lawnmower lawnmower = new Lawnmower(new Position(1,2), Orientation.NORTH);
+        Lawnmower lawnmower = new Lawnmower(new Coordinates(1,2), Orientation.NORTH);
         assertEquals(lawnmower,  config.getLawnmowers().get(0));
     }
 

@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Lawnmower {
-    private  Position _position;
+    private Coordinates _coordinates;
     private  Orientation _orientation;
 
-    public Lawnmower(final Position pos, final Orientation orientation) {
+    public Lawnmower(final Coordinates pos, final Orientation orientation) {
         updateState(pos, orientation);
     }
 
@@ -17,11 +17,11 @@ public class Lawnmower {
         lawnmowerCommands.forEach(lawnmowerCommand -> lawnmowerCommand.doMove(this));
     }
 
-    public Position getPosition() {return _position;}
+    public Coordinates getCoordinates() {return _coordinates;}
     public Orientation getOrientation() {return _orientation;}
 
-    public void updateState(Position position, Orientation orientation) {
-        _position = position;
+    public void updateState(Coordinates coordinates, Orientation orientation) {
+        _coordinates = coordinates;
         _orientation=orientation;
     }
 
@@ -29,11 +29,11 @@ public class Lawnmower {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Lawnmower lawnmower = (Lawnmower) o;
-        return Objects.equals(_position, lawnmower._position) && _orientation == lawnmower._orientation;
+        return Objects.equals(_coordinates, lawnmower._coordinates) && _orientation == lawnmower._orientation;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_position, _orientation);
+        return Objects.hash(_coordinates, _orientation);
     }
 }
