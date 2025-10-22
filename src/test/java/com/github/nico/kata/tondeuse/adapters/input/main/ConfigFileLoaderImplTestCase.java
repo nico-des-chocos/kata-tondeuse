@@ -16,7 +16,7 @@ public class ConfigFileLoaderImplTestCase {
     }
 
     @Test
-    public void loadLawnmower() {
+    public void load_1_lawnmower() {
         ConfigFileLoaderImpl config = getConfigFileLoaderForOneLawnmower();
         assertEquals(1, config.getLawnmowers().size());
         Lawnmower lawnmower = new Lawnmower(new Coordinates(1,2), Orientation.NORTH);
@@ -24,13 +24,27 @@ public class ConfigFileLoaderImplTestCase {
     }
 
     @Test
-    public void loadLawnmowerCommands() {
+    public void load_2_lawnmower() {
+        ConfigFileLoaderImpl config = getConfigFileLoaderForTwoLawnmower();
+        assertEquals(2, config.getLawnmowers().size());
+
+        assertEquals(new Lawnmower(new Coordinates(1,2), Orientation.NORTH),  config.getLawnmowers().get(0));
+        assertEquals(new Lawnmower(new Coordinates(3,3), Orientation.EAST),  config.getLawnmowers().get(1));
+    }
+
+
+    @Test
+    public void load_1_lawnmower_commands() {
         ConfigFileLoaderImpl config = getConfigFileLoaderForOneLawnmower();
         assertEquals(1, config.getLawnmowerCommands().size());
     }
 
     private ConfigFileLoaderImpl getConfigFileLoaderForOneLawnmower() {
         return getConfigFileLoader("data/test/parcourt_simple_une_tondeuse.txt");
+    }
+
+    private ConfigFileLoaderImpl getConfigFileLoaderForTwoLawnmower() {
+        return getConfigFileLoader("data/test/parcourt_2_tondeuses.txt");
     }
 
     private ConfigFileLoaderImpl getConfigFileLoader(String filePath) {

@@ -22,7 +22,7 @@ public class Lawnmower {
 
     public void updateState(Coordinates coordinates, Orientation orientation) {
         _coordinates = coordinates;
-        _orientation=orientation;
+        _orientation = orientation;
     }
 
     @Override

@@ -38,18 +38,18 @@ public class ConfigFileLoaderImpl implements ConfigLoader {
             _gardenWith = Integer.parseInt(size[0]);
             _gardenHeight =  Integer.parseInt(size[1]);
 
-            // Second line First Lawsmower
-            line = scanner.nextLine();
-            String[] lawsmower_info = line.split(" ");
-            _lawnmowers.add(new Lawnmower(new Coordinates(Integer.parseInt(lawsmower_info[0]),Integer.parseInt(lawsmower_info[1])), OrientationAdapter.valueOf(lawsmower_info[2])));
 
+            while (scanner.hasNextLine()) {
+                line = scanner.nextLine();
+                String[] lawsmower_info = line.split(" ");
+                _lawnmowers.add(new Lawnmower(new Coordinates(Integer.parseInt(lawsmower_info[0]),Integer.parseInt(lawsmower_info[1])), OrientationAdapter.valueOf(lawsmower_info[2])));
 
-            // Third line command for the first Lawsmower
-            line = scanner.nextLine();
-            ArrayList<LawnmowerCommand> commands = new ArrayList<>();
-            line.chars().forEach(c -> commands.add(_commandBuilder.getCommand(LawnmowerCommandType.valueOf(Character.toString(c)) )));
-            commands.removeIf(Objects::isNull);
-            _commands.add(commands);
+                line = scanner.nextLine();
+                ArrayList<LawnmowerCommand> commands = new ArrayList<>();
+                line.chars().forEach(c -> commands.add(_commandBuilder.getCommand(LawnmowerCommandType.valueOf(Character.toString(c)) )));
+                commands.removeIf(Objects::isNull);
+                _commands.add(commands);
+            }
 
 
         } catch (FileNotFoundException e) {
