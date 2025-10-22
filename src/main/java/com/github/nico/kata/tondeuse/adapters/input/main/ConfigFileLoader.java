@@ -1,6 +1,5 @@
 package com.github.nico.kata.tondeuse.adapters.input.main;
 
-import com.github.nico.kata.tondeuse.domain.Orientation;
 import com.github.nico.kata.tondeuse.domain.Position;
 import com.github.nico.kata.tondeuse.domain.Lawnmower;
 import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
@@ -20,11 +19,11 @@ public class ConfigFileLoader {
 
     private final ArrayList<ArrayList<LawnmowerCommand>> _commands = new ArrayList<>();
 
-    private CommandBuilder _commandBuilder;
+    private final CommandBuilder _commandBuilder;
 
     public ConfigFileLoader(CommandBuilder commandBuilder) {
         _commandBuilder = commandBuilder;
-    };
+    }
 
     public void loadConfigFromFile(final String filePath) {
         try {
@@ -46,7 +45,7 @@ public class ConfigFileLoader {
             // Third line command for the first Lawsmower
             line = scanner.nextLine();
             ArrayList<LawnmowerCommand> commands = new ArrayList<>();
-            line.chars().forEach(c -> {commands.add(_commandBuilder.getCommand(LownmowerCommandType.valueOf(Character.toString(c)) )); });
+            line.chars().forEach(c -> commands.add(_commandBuilder.getCommand(LownmowerCommandType.valueOf(Character.toString(c)) )));
             _commands.add(commands);
         } catch (FileNotFoundException e) {
             throw new InvalidPathException(filePath, e.getMessage());
@@ -69,7 +68,4 @@ public class ConfigFileLoader {
         return new ArrayList<>(_commands);
     }
 
-    public void setCommandBuilder(CommandBuilder commandBuilder) {
-        _commandBuilder =  commandBuilder;
-    }
 }

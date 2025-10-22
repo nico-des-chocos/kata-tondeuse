@@ -20,6 +20,7 @@ public class ConfigFileLoaderTestCase {
         ConfigFileLoader config = getConfigFileLoaderForOneLanmower();
         assertEquals(1, config.getLawnmowers().size());
         Lawnmower lawnmower = new Lawnmower(new Position(1,2), Orientation.NORTH);
+        assertEquals(lawnmower,  config.getLawnmowers().get(0));
     }
 
     @Test
@@ -42,12 +43,7 @@ public class ConfigFileLoaderTestCase {
 
         @Override
         public LawnmowerCommand getCommand(final LownmowerCommandType type) {
-            return new LawnmowerCommand() {
-                @Override
-                public Lawnmower doMove(final Lawnmower lawnmower) {
-                    return lawnmower;
-                }
-            };
+            return lawnmower -> lawnmower;
         }
     }
 
