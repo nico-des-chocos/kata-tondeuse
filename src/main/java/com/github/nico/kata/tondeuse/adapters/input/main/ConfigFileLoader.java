@@ -13,14 +13,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ConfigFileLoader {
-    private final int _gardenWith;
-    private final int _gardenHeight;
+    private  int _gardenWith;
+    private  int _gardenHeight;
 
     private final ArrayList<Lawnmower> _lawnmowers = new ArrayList<>();
 
+    private final ArrayList<ArrayList<LawnmowerCommand>> _commands = new ArrayList<>();
+
     private CommandBuilder _commandBuilder;
 
-    public ConfigFileLoader(final String filePath) {
+    public ConfigFileLoader(CommandBuilder commandBuilder) {
+        _commandBuilder = commandBuilder;
+    };
+
+    public void loadConfigFromFile(final String filePath) {
         try {
             Scanner scanner = new Scanner(new File(filePath));
 
@@ -39,8 +45,9 @@ public class ConfigFileLoader {
 
             // Third line command for the first Lawsmower
             line = scanner.nextLine();
-
-
+            ArrayList<LawnmowerCommand> commands = new ArrayList<>();
+            line.chars().forEach(c -> {commands.add(_commandBuilder.getCommand(LownmowerCommandType.valueOf(Character.toString(c)) )); });
+            _commands.add(commands);
         } catch (FileNotFoundException e) {
             throw new InvalidPathException(filePath, e.getMessage());
         }
@@ -58,8 +65,8 @@ public class ConfigFileLoader {
         return new ArrayList<>(_lawnmowers);
     }
 
-    public List<LawnmowerCommand> getLawnmowerCommands() {
-        return new ArrayList<>();
+    public ArrayList<List<LawnmowerCommand>> getLawnmowerCommands() {
+        return new ArrayList<>(_commands);
     }
 
     public void setCommandBuilder(CommandBuilder commandBuilder) {

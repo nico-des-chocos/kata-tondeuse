@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ConfigFileLoaderTestCase {
     @Test
     public void loadGardenSize() {
-        ConfigFileLoader config = new ConfigFileLoader("data/test/parcourt_simple_une_tondeuse.txt");
+        ConfigFileLoader config = getConfigFileLoaderForOneLanmower();
 
         assertEquals(5, config.getGardenWith());
         assertEquals(5, config.getGardenHeight());
@@ -17,27 +17,34 @@ public class ConfigFileLoaderTestCase {
 
     @Test
     public void loadLawnmower() {
-        ConfigFileLoader config = new ConfigFileLoader("data/test/parcourt_simple_une_tondeuse.txt");
-
+        ConfigFileLoader config = getConfigFileLoaderForOneLanmower();
         assertEquals(1, config.getLawnmowers().size());
-
         Lawnmower lawnmower = new Lawnmower(new Position(1,2), Orientation.NORTH);
     }
 
     @Test
     public void loadLawnmowerCommands() {
-        ConfigFileLoader config = new ConfigFileLoader("data/test/parcourt_simple_une_tondeuse.txt");
-        config.setCommandBuilder(new StubCommandBuilder());
-        assertEquals(9, config.getLawnmowerCommands().size());
+        ConfigFileLoader config = getConfigFileLoaderForOneLanmower();
+        assertEquals(1, config.getLawnmowerCommands().size());
     }
 
-    private class StubCommandBuilder implements CommandBuilder {
+    private ConfigFileLoader getConfigFileLoaderForOneLanmower() {
+        return getConfigFileLoader("data/test/parcourt_simple_une_tondeuse.txt");
+    }
+
+    private ConfigFileLoader getConfigFileLoader(String filePath) {
+        ConfigFileLoader config = new ConfigFileLoader(new StubCommandBuilder());
+        config.loadConfigFromFile(filePath);
+        return config;
+    }
+
+    private static class StubCommandBuilder implements CommandBuilder {
 
         @Override
-        public LawnmowerCommand getCommand(LownmowerCommandType type) {
+        public LawnmowerCommand getCommand(final LownmowerCommandType type) {
             return new LawnmowerCommand() {
                 @Override
-                public Lawnmower doMove(Lawnmower lawnmower) {
+                public Lawnmower doMove(final Lawnmower lawnmower) {
                     return lawnmower;
                 }
             };
