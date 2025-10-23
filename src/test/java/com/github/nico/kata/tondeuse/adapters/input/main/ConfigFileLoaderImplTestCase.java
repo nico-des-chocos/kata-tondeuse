@@ -40,11 +40,11 @@ public class ConfigFileLoaderImplTestCase {
     }
 
     private ConfigFileLoaderImpl getConfigFileLoaderForOneLawnmower() {
-        return getConfigFileLoader("data/test/parcourt_simple_une_tondeuse.txt");
+        return getConfigFileLoader("data/test/test_one_lawnmower.txt");
     }
 
     private ConfigFileLoaderImpl getConfigFileLoaderForTwoLawnmower() {
-        return getConfigFileLoader("data/test/parcourt_2_tondeuses.txt");
+        return getConfigFileLoader("data/test/test_load_for_2_lawnmowers.txt");
     }
 
     private ConfigFileLoaderImpl getConfigFileLoader(String filePath) {

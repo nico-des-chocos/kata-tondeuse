@@ -4,8 +4,11 @@ import com.github.nico.kata.tondeuse.adapters.input.main.validator.ArgumentValid
 import com.github.nico.kata.tondeuse.adapters.input.main.CommandBuilderImpl;
 import com.github.nico.kata.tondeuse.adapters.input.main.ConfigFileLoaderImpl;
 import com.github.nico.kata.tondeuse.adapters.input.main.validator.FileArgumentValidator;
+import com.github.nico.kata.tondeuse.adapters.input.main.validator.FileContentError;
+import com.github.nico.kata.tondeuse.adapters.input.main.validator.FileContentValidator;
 import com.github.nico.kata.tondeuse.domain.Lawnmower;
 import com.github.nico.kata.tondeuse.domain.command.LawnmowerCommand;
+import com.github.nico.kata.tondeuse.ports.output.main.OutPrintFileError;
 import com.github.nico.kata.tondeuse.ports.output.main.OutPrintLawnmowerState;
 
 import java.io.IOException;
@@ -17,6 +20,7 @@ public class LawnmowerMain {
         try {
             ArgumentValidator.validate(args);
             FileArgumentValidator.validate(args);
+            new FileContentValidator().validate(args[0]);
 
             CommandBuilderImpl commandBuilder = new CommandBuilderImpl();
             ConfigFileLoaderImpl fileLoader = new ConfigFileLoaderImpl(commandBuilder);
@@ -33,11 +37,18 @@ public class LawnmowerMain {
             }
 
             OutPrintLawnmowerState.printState(System.out, lawnmowers);
+            System.exit(0);
+
         } catch (IllegalArgumentException | IOException e) {
             System.err.println(e.getMessage());
+            System.exit(1);
+        } catch (FileContentError e) {
+            try {
+                OutPrintFileError.printErrors(System.err, e);
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            System.exit(1);
         }
     }
-
-
-
 }
