@@ -8,7 +8,7 @@ Création d'un fork de https://github.com/template-repository/maven-template-rep
 maven package
 
 ## Run
-java -jar ./target/kata-tondeuse-1.0.jar ./data/test/parcourt_2_tondeuses.txt
+java -jar ./target/kata-tondeuse-1.0-SNAPSHOT.jar ./data/test/parcourt_2_tondeuses.txt
 
 ## TODO, QUESTIONS, PROBLEMES
 
